@@ -6,8 +6,10 @@ class Node:
     def __delete__(self, instance):
         print('Deleted Node with data: ', self.data)
 
-    def __del__(self, instance):
-        print('Deleted Node with data: ', self.data)
+    #def __del__(self, instance):
+        #print('Deleted Node')
+
+
 class LinkedList:
     def __init__(self):
         self.head = None
@@ -46,7 +48,7 @@ class LinkedList:
             else:
                 currentNode = self.head
                 for _ in range(1, position):
-                    print('Current node data = ', currentNode.data)
+                    #print('Current node data = ', currentNode.data)
                     currentNode = currentNode.next
                 return currentNode
 
@@ -60,14 +62,14 @@ class LinkedList:
                 self.head.next = secondNode
             else:
                 if position < 0:
-                    position = self.totalNodes + position + 1
-                if position >= self.totalNodes:
+                    position = self.totalNodes + position
+                if position > self.totalNodes:
                     self.insert(data)
                     self.totalNodes -= 1
                 else:
-                    beforeNode = self.traverse_till(position)
+                    beforeNode = self.traverse_till(position+1)
                     afterNode = beforeNode.next
-                    print('before = ', beforeNode.data, ' after = ', afterNode.data)
+                    #print('before = ', beforeNode.data, ' after = ', afterNode.data)
                     newNode = Node(data)
                     beforeNode.next = newNode
                     newNode.next = afterNode
@@ -75,9 +77,9 @@ class LinkedList:
 
     def print(self):
         currentNode = self.head
-        print('Total nodes = ', self.totalNodes)
+        print('\n\t\tTotal nodes = ', self.totalNodes)
         for _ in range(self.totalNodes):
-            print('\n\t Node data: ', currentNode.data)
+            print('\t Node data: ', currentNode.data)
             currentNode = currentNode.next
 
     def delete(self, data):
@@ -107,6 +109,33 @@ class LinkedList:
             else:
                 print('Data: ', data, ' is not found in the linked list')
 
+    def delete_at(self, position):
+        if self.totalNodes == 0:
+            print('Empty linked list!')
+            return
+        else:
+            if position < 0:
+                position = self.totalNodes + position
+
+            if position >= self.totalNodes:
+                print('Index out of range')
+                return
+            else:
+                currentNode = self.head
+                previousNode = None
+                for _ in range(1, position+1):
+                    #print('Current node data = ', currentNode.data)
+                    previousNode = currentNode
+                    currentNode = currentNode.next
+                if previousNode is None:
+                    head = self.head
+                    self.head = self.head.next
+                    del head
+                else:
+                    previousNode.next = currentNode.next
+                    del currentNode
+                self.totalNodes -= 1
+
 
 myLL = LinkedList()
 myLL.insert('Node1')
@@ -119,4 +148,6 @@ myLL.print()
 myLL.delete('Node3')
 myLL.print()
 myLL.delete('Node')
+myLL.print()
+myLL.delete_at(-2)
 myLL.print()
