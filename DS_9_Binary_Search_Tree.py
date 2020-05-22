@@ -56,13 +56,34 @@ class BinarySearchTree:
         print('\n\n\t\t\t>>>POSTORDER TRAVERSAL')
         self.postorder_traversal(self.root)
 
+    def search_node(self, current, data):
+        if current.data == data:
+            print('Node: ', data, ' found the Binary Search Tree')
+            return
+        if current.data < data:
+            if current.right is None:
+                print('Node: ', data, ' is not found the Binary Search Tree')
+                return
+            else:
+                self.search_node(current.right, data)
+        elif current.data > data:
+            if current.left is None:
+                print('Node: ', data, ' is not found the Binary Search Tree')
+                return
+            else:
+                self.search_node(current.left, data)
 
-# Let us create the following BST 
-#      50 
-#    /      \ 
-#   30     70 
-#   / \    / \ 
-#  20 40  60 80 
+    def search(self, data):
+        print('\n\n\t\t>>> Searching for ', data)
+        self.search_node(self.root, data)
+
+
+# Let us create the following BST
+#      50
+#    /      \
+#   30     70
+#   / \    / \
+#  20 40  60 80
 
 bst = BinarySearchTree(50)
 bst.push(30)
@@ -74,7 +95,10 @@ bst.push(80)
 bst.inorder()
 bst.preorder()
 bst.postorder()
+bst.search(10)
+bst.search(80)
 
+#Output
 """
 			>>>INORDER TRAVERSAL
 Node data:  20
@@ -104,5 +128,13 @@ Node data:  60
 Node data:  70
 Node data:  80
 Node data:  50
+
+
+		>>> Searching for  10
+Node:  10  is not found the Binary Search Tree
+
+
+		>>> Searching for  80
+Node:  80  found the Binary Search Tree
 
 """
