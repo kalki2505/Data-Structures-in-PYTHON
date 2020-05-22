@@ -57,6 +57,13 @@ class BinarySearchTree:
         self.postorder_traversal(self.root)
 
 
+# Let us create the following BST 
+#      50 
+#    /      \ 
+#   30     70 
+#   / \    / \ 
+#  20 40  60 80 
+
 bst = BinarySearchTree(50)
 bst.push(30)
 bst.push(20)
@@ -67,3 +74,35 @@ bst.push(80)
 bst.inorder()
 bst.preorder()
 bst.postorder()
+
+"""
+			>>>INORDER TRAVERSAL
+Node data:  20
+Node data:  30
+Node data:  40
+Node data:  50
+Node data:  60
+Node data:  70
+Node data:  80
+
+
+			>>>PREORDER TRAVERSAL
+Node data:  50
+Node data:  20
+Node data:  30
+Node data:  40
+Node data:  60
+Node data:  70
+Node data:  80
+
+
+			>>>POSTORDER TRAVERSAL
+Node data:  20
+Node data:  30
+Node data:  40
+Node data:  60
+Node data:  70
+Node data:  80
+Node data:  50
+
+"""
